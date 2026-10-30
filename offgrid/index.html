@@ -1,0 +1,127 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stoops Off-Grid Utility Room Hot or Not</title><style>
+body{font-family:-apple-system,Segoe UI,sans-serif;margin:0;padding:10px;max-width:720px;margin:auto}
+button{min-height:44px;font:inherit;font-weight:700;border-radius:12px;border:1px solid #999;background:#f2f2f2;padding:10px 14px;cursor:pointer}
+.on{background:#111;color:#fff}.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.big button{flex:1 1 0;min-width:58px;padding:16px 4px}.big button:last-child{background:#111;color:#fff}
+#img{width:100%;height:58vh;object-fit:contain;background:#eee;border-radius:12px}.s{color:#555;font-size:13px}
+.c{border:1px solid #ccc;border-radius:12px;padding:8px;margin:6px 0;display:flex;gap:8px;align-items:center}
+.c img{width:96px;height:72px;object-fit:cover;border-radius:8px}h2{margin:18px 0 6px}
+</style></head><body>
+<h3 style="margin:4px 0">Stoops: Off-Grid Utility Room · Hot or Not</h3><div class="s">Batteries, generator, well, water storage, heat, solar, controls and room finishes. Vote on how each setup looks and works. <a href="../">← House Hot or Not</a></div>
+<div class="row"><button id="bN">Nate</button><button id="bJ">Jami</button><button id="bR">Results</button><button id="bS" class="honTop">⇄ Share / Load votes</button></div>
+<div id="v"></div><script>
+const D=[{"n": 1, "c": "Battery + Inverter Walls", "t": "Sol-Ark 12K above 8-battery rack, shop wall", "d": "feldasolar.com", "r": 0.75, "u": "img/OG01-solark-rack-shop.jpg"}, {"n": 2, "c": "Battery + Inverter Walls", "t": "Two Powerwall 3 units on an indoor wall", "d": "Wikimedia Commons", "r": 0.985, "u": "img/OG02-powerwall3-pair-indoor.jpg"}, {"n": 3, "c": "Battery + Inverter Walls", "t": "Full garage wall of Powerwalls", "d": "electrek.co", "r": 1.813, "u": "img/OG03-powerwall-garage-wall.jpg"}, {"n": 4, "c": "Battery + Inverter Walls", "t": "Enphase IQ batteries + combiner, outside wall", "d": "texassolarguys.com", "r": 1.333, "u": "img/OG04-enphase-5p-wall.jpg"}, {"n": 5, "c": "Battery + Inverter Walls", "t": "Inverters on black board, battery cabinets", "d": "community.victronenergy.com", "r": 0.75, "u": "img/OG05-victron-battery-room.jpg"}, {"n": 6, "c": "Battery + Inverter Walls", "t": "EG4 battery rack beside Sol-Ark board", "d": "xtremeownage.com", "r": 1.333, "u": "img/OG06-eg4-rack-solark.jpg"}, {"n": 7, "c": "Battery + Inverter Walls", "t": "Victron inverter over 8-battery rack", "d": "voltaconsolar.com", "r": 1.0, "u": "img/OG07-victron-rack-garage.jpg"}, {"n": 8, "c": "Equipment Boards + Layout", "t": "Inverter, DC box and panel on one white board", "d": "community.victronenergy.com", "r": 1.333, "u": "img/OG08-white-board-inverter-panel.jpg"}, {"n": 9, "c": "Equipment Boards + Layout", "t": "Four inverters on concrete-board backer", "d": "community.victronenergy.com", "r": 1.329, "u": "img/OG09-four-inverters-backer.jpg"}, {"n": 10, "c": "Equipment Boards + Layout", "t": "Inverter + panels fed through a wireway trough", "d": "xtremeownage.com", "r": 1.333, "u": "img/OG10-inverter-wireway.jpg"}, {"n": 11, "c": "Equipment Boards + Layout", "t": "Wall boiler, expansion tank, indirect tank below", "d": "radiantheatsystemsanddesign.com", "r": 0.75, "u": "img/OG11-boiler-indirect-wall.jpg"}, {"n": 12, "c": "Equipment Boards + Layout", "t": "Water heater, pump board, open floor space", "d": "ecomech.net", "r": 1.5, "u": "img/OG12-water-heater-pump-board.jpg"}, {"n": 13, "c": "Generator + Transfer", "t": "Standby generator on pad beside AC unit", "d": "robies.com", "r": 1.5, "u": "img/OG13-generac-beside-ac.jpg"}, {"n": 14, "c": "Generator + Transfer", "t": "Standby generator on concrete pad", "d": "kingelectricaltx.com", "r": 1.114, "u": "img/OG14-generac-pad.jpg"}, {"n": 15, "c": "Generator + Transfer", "t": "Transfer switch, meter, disconnects on wall", "d": "xtremeownage.com", "r": 1.055, "u": "img/OG15-kohler-ats-wall.jpg"}, {"n": 16, "c": "Generator + Transfer", "t": "Buried propane tank being set", "d": "104cliffroadeast.com", "r": 1.498, "u": "img/OG16-propane-tank-burying.jpg"}, {"n": 17, "c": "Generator + Transfer", "t": "Buried propane tank: only dome lid shows", "d": "104cliffroadeast.com", "r": 1.498, "u": "img/OG17-propane-dome-lid.jpg"}, {"n": 18, "c": "Well Water", "t": "Well pressure tank, tank tee, gauge, switch", "d": "nationalwaterservice.com", "r": 0.75, "u": "img/OG18-pressure-tank-tee.jpg"}, {"n": 19, "c": "Well Water", "t": "Softener, UV, pressure tank in a line", "d": "nationalwaterservice.com", "r": 0.75, "u": "img/OG19-softener-uv-pressure.jpg"}, {"n": 20, "c": "Well Water", "t": "Twin softener, brine tank, UV, floor drain", "d": "nationalwaterservice.com", "r": 0.75, "u": "img/OG20-twin-softener-brine.jpg"}, {"n": 21, "c": "Well Water", "t": "Softeners, UV, RO on one board", "d": "nationalwaterservice.com", "r": 1.5, "u": "img/OG21-softener-uv-ro-board.jpg"}, {"n": 22, "c": "Well Water", "t": "Twin treatment tanks, brine tank, RO rack", "d": "nationalwaterservice.com", "r": 0.667, "u": "img/OG22-twin-tanks-ro.jpg"}, {"n": 23, "c": "Water Storage + Cistern", "t": "Cistern booster pump + pressure tank", "d": "rainbrothers.com", "r": 1.341, "u": "img/OG23-cistern-pump-tank.jpg"}, {"n": 24, "c": "Water Storage + Cistern", "t": "Concrete cistern set by crane", "d": "rainbrothers.com", "r": 1.0, "u": "img/OG24-concrete-cistern-crane.jpg"}, {"n": 25, "c": "Water Storage + Cistern", "t": "Modular underground cistern going in", "d": "greywatercorps.com", "r": 1.333, "u": "img/OG25-modular-cistern.jpg"}, {"n": 26, "c": "Water Storage + Cistern", "t": "Concrete cistern with inlet + riser", "d": "rainbrothers.com", "r": 0.8, "u": "img/OG26-cistern-riser-inlet.jpg"}, {"n": 27, "c": "Heating + Hot Water", "t": "Heat pump water heater on pan, basement", "d": "ssg.coop", "r": 0.75, "u": "img/OG27-hpwh-basement.jpg"}, {"n": 28, "c": "Heating + Hot Water", "t": "Geothermal heat pump with ductwork", "d": "ecomech.net", "r": 0.75, "u": "img/OG28-geo-heat-pump.jpg"}, {"n": 29, "c": "Heating + Hot Water", "t": "Outdoor wood boiler with wood pile", "d": "Wikimedia Commons", "r": 1.664, "u": "img/OG29-owb-woodpile.jpg"}, {"n": 30, "c": "Heating + Hot Water", "t": "Outdoor wood boiler beside wood shed", "d": "Wikimedia Commons", "r": 1.585, "u": "img/OG30-owb-woodshed.jpg"}, {"n": 31, "c": "Heating + Hot Water", "t": "Pellet boiler with hot water tank", "d": "Wikimedia Commons", "r": 0.75, "u": "img/OG31-pellet-boiler.jpg"}, {"n": 32, "c": "Heating + Hot Water", "t": "Indirect hot water tank + wall boiler", "d": "radiantheatsystemsanddesign.com", "r": 0.75, "u": "img/OG32-indirect-tank-boiler.jpg"}, {"n": 33, "c": "Solar", "t": "Ground-mount array in rural yard", "d": "Green Alternatives via EnergySage", "r": 1.333, "u": "img/OG33-ground-mount-rural.jpg"}, {"n": 34, "c": "Solar", "t": "Ground-mount array, two tables", "d": "Green Alternatives via EnergySage", "r": 1.778, "u": "img/OG34-ground-mount-two-row.jpg"}, {"n": 35, "c": "Solar", "t": "Ground-mount array on a farm", "d": "Green Alternatives via EnergySage", "r": 1.333, "u": "img/OG35-ground-mount-silos.jpg"}, {"n": 36, "c": "Solar", "t": "Roof array on a pole barn", "d": "Green Alternatives via EnergySage", "r": 1.5, "u": "img/OG36-pole-barn-roof.jpg"}, {"n": 37, "c": "Solar", "t": "Roof array, disconnects on back wall", "d": "texassolarguys.com", "r": 1.333, "u": "img/OG37-roof-plus-wall-gear.jpg"}, {"n": 38, "c": "Monitoring + Controls", "t": "SPAN smart panel, lit status ring", "d": "holsensolar.com", "r": 1.333, "u": "img/OG38-span-lit.jpg"}, {"n": 39, "c": "Monitoring + Controls", "t": "SPAN smart panel, door closed", "d": "holsensolar.com", "r": 1.333, "u": "img/OG39-span-closed.jpg"}, {"n": 40, "c": "Monitoring + Controls", "t": "Wall rack: patch panel, switch, UPS", "d": "nick.blog", "r": 0.748, "u": "img/OG40-network-rack.jpg"}, {"n": 41, "c": "Monitoring + Controls", "t": "Inverter with GX monitor + touch display", "d": "voltaconsolar.com", "r": 1.0, "u": "img/OG41-gx-display.jpg"}, {"n": 42, "c": "Room Finishes", "t": "Flake epoxy floor, furnace room", "d": "nextlevelepoxyinc.net", "r": 0.75, "u": "img/OG42-flake-floor-room.jpg"}, {"n": 43, "c": "Room Finishes", "t": "Flake floor with cove base at wall", "d": "nextlevelepoxyinc.net", "r": 1.333, "u": "img/OG43-flake-cove-base.jpg"}, {"n": 44, "c": "Room Finishes", "t": "Color-coded supply + return piping", "d": "northernbuilt.pro", "r": 0.853, "u": "img/OG44-color-coded-piping.jpg"}, {"n": 45, "c": "Room Finishes", "t": "Show-quality hydronic wall, bright light", "d": "achrnews.com · Blackrock HVAC", "r": 1.636, "u": "img/OG45-show-quality-wall.jpg"}];const CH=[["NO",0],["YES 1",1],["YES 2",2],["YES 3",3],["MUST HAVE",5]];
+const CATS=["Battery + Inverter Walls", "Equipment Boards + Layout", "Generator + Transfer", "Well Water", "Water Storage + Cistern", "Heating + Hot Water", "Solar", "Monitoring + Controls", "Room Finishes"];
+let S=JSON.parse(localStorage.getItem("hon-og")||"null")||{voter:"Nate",view:"vote",votes:{Nate:{},Jami:{}},pos:{Nate:0,Jami:0},last:{Nate:"",Jami:""}};
+S.ts=S.ts||{};["Nate","Jami"].forEach(v=>{S.votes[v]=S.votes[v]||{};S.ts[v]=S.ts[v]||{};S.pos[v]=S.pos[v]||0});
+const save=()=>localStorage.setItem("hon-og",JSON.stringify(S));
+const L=p=>p===undefined?"–":(CH.find(c=>c[1]===p)||[p])[0];
+function vote(p){const i=S.pos[S.voter],it=D[i];S.votes[S.voter][it.n]=p;S.ts[S.voter][it.n]=Date.now();S.last[S.voter]="You rated #"+it.n+" "+it.t+": "+L(p);S.pos[S.voter]=i+1;save();R()}
+function sc(){return D.map(it=>{const a=S.votes.Nate[it.n],b=S.votes.Jami[it.n];const m=[];if(a===5)m.push("Nate");if(b===5)m.push("Jami");
+return{it,a,b,tot:(a||0)+(b||0),min:Math.min(a||0,b||0),m,split:a!==undefined&&b!==undefined&&((a===0)!==(b===0)||Math.abs(a-b)>=2)}})}
+const rk=x=>[...x].sort((p,q)=>q.tot-p.tot||q.min-p.min||p.it.n-q.it.n);
+const ag=s=>s.split?" · SPLIT":(s.a!==undefined&&s.b!==undefined?" · agree":"");
+const card=(s,tag)=>`<div class="c"><img src="${s.it.u}"><div><b>${tag?tag+" · ":""}#${s.it.n} ${s.it.t}</b><div class="s">Nate ${L(s.a)} · Jami ${L(s.b)} · Total ${s.tot}${s.m.length?" · Must have: "+s.m.join(" + "):""}${ag(s)}</div></div></div>`;
+function R(){bN.className=S.view=="vote"&&S.voter=="Nate"?"on":"";bJ.className=S.view=="vote"&&S.voter=="Jami"?"on":"";bR.className=S.view=="results"?"on":"";
+bN.textContent="Nate "+Object.keys(S.votes.Nate).length+"/"+D.length;bJ.textContent="Jami "+Object.keys(S.votes.Jami).length+"/"+D.length;
+const V=document.getElementById("v");
+if(S.view=="vote"){const i=S.pos[S.voter];if(i>=D.length){V.innerHTML=`<h2>${S.voter} is done.</h2><p class="s">${S.last[S.voter]}</p><div class="row">${S.voter=="Nate"?'<button onclick="S.voter=\'Jami\';save();R()">Jami\'s turn</button>':''}<button onclick="S.view=\'results\';save();R()">See results</button><button class="honTop" onclick="HONopen()">📤 Share votes</button><button onclick="S.pos[S.voter]--;save();R()">Back one</button></div>`;return}
+const it=D[i];V.innerHTML=`<div class="row" style="justify-content:space-between;margin:8px 0"><b>${S.voter} · ${it.c} · ${i+1} of ${D.length}</b>${i?'<button onclick="S.pos[S.voter]--;save();R()">Back</button>':''}</div>
+<img id="img" src="${it.u}" alt="${it.t}"><div style="font-size:20px;font-weight:800;margin-top:6px">#${it.n} ${it.t}</div><div class="s">${it.d}</div>
+<div class="row big" style="margin-top:10px">${CH.map(c=>`<button onclick="vote(${c[1]})">${c[0]}</button>`).join("")}</div><p class="s">${S.last[S.voter]}</p>`;return}
+const X=sc(),M=X.filter(s=>s.m.length);const W=CATS.map(c=>{const r=rk(X.filter(s=>s.it.c==c));return{c,r,w:r[0]&&r[0].tot>0?r[0]:null,u:r[1]&&r[1].tot>0?r[1]:null}});
+const look=[],seen=new Set();W.forEach(w=>{if(w.w){look.push([w.c,w.w,"Winner"]);seen.add(w.w.it.n)}});M.forEach(s=>{if(!seen.has(s.it.n)){look.push([s.it.c,s,"Must have"]);seen.add(s.it.n)}});
+look.sort((p,q)=>CATS.indexOf(p[0])-CATS.indexOf(q[0]));
+let h=`<p class="s">Score = Nate + Jami (NO 0, YES 1–3, MUST HAVE 5). Ties go to the higher of the two lower votes (2+2 beats 3+1). Any Must Have is locked into Our picks. Split = one NO and one YES, or votes 2+ apart.</p>`;
+h=(window.HONbox?HONbox():"")+h;
+if(M.length)h+="<h2>Must haves</h2>"+M.map(s=>card(s,"")).join("");
+h+="<h2>Our picks</h2>"+(look.length?look.map(l=>card(l[1],l[0]+" "+l[2])).join(""):"<p>Vote a few photos first.</p>");
+W.forEach(w=>{h+=`<h2>${w.c}</h2>`+(w.w?card(w.w,"WINNER"):"")+(w.u?card(w.u,"Runner-up"):"")+w.r.map(s=>`<div class="s" style="padding:3px 0"><b>${s.tot}</b> · #${s.it.n} ${s.it.t} · N ${L(s.a)} · J ${L(s.b)}${ag(s)}</div>`).join("")});
+h+=`<p><button onclick="if(confirm('Clear all votes?')){localStorage.removeItem('hon-og');location.reload()}">Start over</button></p>`;V.innerHTML=h}
+bN.onclick=()=>{S.voter="Nate";S.view="vote";save();R()};bJ.onclick=()=>{S.voter="Jami";S.view="vote";save();R()};bR.onclick=()=>{S.view="results";save();R()};bS.onclick=()=>HONopen();R();
+
+window.HON={id:"stoops-hon-offgrid",prefix:"HON-OG",title:"Stoops Off-Grid Utility Room Hot or Not",
+how:"Vote on your phone, tap Share votes, send to Jami, she taps Load votes.",
+other:"That code is from a different Hot or Not (house or kids). Open that slideshow and load it there.",
+summary:()=>"Nate "+Object.keys(S.votes.Nate).length+"/"+D.length+" · Jami "+Object.keys(S.votes.Jami).length+"/"+D.length,
+fname:()=>"stoops-hot-or-not-offgrid-votes-"+new Date().toISOString().slice(0,10)+".json",
+exp:()=>{const o={f:"stoops-hon-offgrid",v:1,at:Math.round(Date.now()/1000),votes:{}};["Nate","Jami"].forEach(v=>{const e={};Object.keys(S.votes[v]).forEach(n=>e[n]=[S.votes[v][n],Math.round((S.ts[v][n]||0)/1000)]);if(Object.keys(e).length)o.votes[v]=e});return o},
+merge:o=>{const ok=new Set(D.map(d=>String(d.n))),P=[0,1,2,3,5];let a=0,u=0,k=0,same=0;const who=[];
+ Object.keys(o.votes||{}).forEach(v=>{if(!S.votes[v])return;who.push(v);Object.entries(o.votes[v]).forEach(([n,x])=>{const p=Array.isArray(x)?x[0]:x,t=Array.isArray(x)?(+x[1]||0):0;if(!ok.has(n)||!P.includes(p))return;
+  const loc=S.votes[v][n],lt=Math.round((S.ts[v][n]||0)/1000);
+  if(loc===undefined){S.votes[v][n]=p;S.ts[v][n]=t*1000;a++}else if(loc===p){same++;if(t>lt)S.ts[v][n]=t*1000}else if(t>lt){S.votes[v][n]=p;S.ts[v][n]=t*1000;u++}else k++});
+  const f=D.findIndex(d=>S.votes[v][d.n]===undefined),cur=D[S.pos[v]];if(S.pos[v]>=D.length||!cur||S.votes[v][cur.n]!==undefined)S.pos[v]=f<0?D.length:f});
+ if(!who.length)throw new Error("No Nate or Jami votes in that code.");
+ S.view="results";save();return "Loaded "+who.join(" + ")+": "+a+" new, "+u+" updated (newer)"+(k?", "+k+" kept (yours were newer)":"")+". Now "+HON.summary()},
+after:()=>R()};
+/* ---- Share / Load votes (self-contained, no network) ---- */
+(function(){
+const H=window.HON;// {id,prefix,title,exp(),merge(obj)->msg,after()}
+const b64e=s=>btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+const b64d=s=>{s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';return decodeURIComponent(escape(atob(s)))};
+function makeCode(){return H.prefix+':'+b64e(JSON.stringify(H.exp()))}
+function parse(txt){
+ txt=String(txt||'').trim();if(!txt)throw new Error('Nothing to load. Paste a code or pick a file.');
+ let obj=null;
+ if(txt[0]=='{'){obj=JSON.parse(txt)}
+ else{const m=txt.match(/(?:#v=)?([A-Z0-9]+-[A-Z0-9-]+):([A-Za-z0-9_\-+\/=]+)/)||txt.match(/#v=([A-Za-z0-9_\-+\/=]+)/);
+  if(!m)throw new Error("That doesn't look like a votes code.");
+  if(m.length==3&&m[1]!==H.prefix)throw new Error(H.other);
+  try{obj=JSON.parse(b64d(m.length==3?m[2]:m[1]))}catch(e){throw new Error('That code is cut off or damaged. Copy the whole thing and try again.')}}
+ if(!obj||obj.f!==H.id)throw new Error(H.other);
+ return obj}
+function load(txt){try{const o=parse(txt);const msg=H.merge(o);H.after();toast(msg);close();return msg}catch(e){alert(e.message);return 'ERR:'+e.message}}
+window.HONload=load;window.HONcode=makeCode;
+function toast(t){let d=document.createElement('div');d.textContent=t;d.style.cssText='position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:#111;color:#fff;padding:12px 16px;border-radius:12px;font:700 15px -apple-system,system-ui,sans-serif;z-index:99999;max-width:92vw;box-shadow:0 4px 18px rgba(0,0,0,.4);text-align:center';document.body.appendChild(d);setTimeout(()=>d.remove(),4500)}
+const st=document.createElement('style');st.textContent=`
+#honSync{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:9999;display:none;align-items:flex-start;justify-content:center;overflow:auto;padding:14px}
+#honSync .p{background:#fff;color:#111;border-radius:16px;max-width:560px;width:100%;padding:16px;font:15px -apple-system,system-ui,Segoe UI,sans-serif}
+#honSync h3{margin:0 0 6px;font-size:20px}#honSync .how{background:#fff6cc;border-radius:10px;padding:8px 10px;font-weight:700;margin:6px 0 12px}
+.honB{display:block;width:100%;min-height:52px;margin:8px 0;border:0;border-radius:14px;font:800 18px -apple-system,system-ui,sans-serif;cursor:pointer;color:#fff;background:#1e6fe8}
+.honB.g{background:#2e9e4f}.honB.l{background:#eee;color:#111;border:1px solid #bbb}
+#honSync textarea{width:100%;box-sizing:border-box;height:84px;font:13px ui-monospace,monospace;border-radius:10px;border:1px solid #aaa;padding:8px}
+#honSync .s2{font-size:13px;color:#555}
+.honTop{background:#ffcc00!important;color:#111!important;border:0!important;font-weight:900!important}
+.chip.honTop{min-height:46px;font-size:17px}
+.honBox{border:2px solid #ffcc00;border-radius:14px;padding:10px;margin:10px 0}
+.honBox .how{font-weight:700;font-size:14px;margin-bottom:6px}
+.honBox .r{display:flex;gap:8px}.honBox .r button{flex:1;min-height:50px;border-radius:12px;border:0;font-weight:900;font-size:17px;color:#fff;background:#1e6fe8}.honBox .r button+button{background:#2e9e4f}
+`;document.head.appendChild(st);
+const HOW=H.how;
+const ov=document.createElement('div');ov.id='honSync';ov.innerHTML=`<div class="p">
+<div style="display:flex;justify-content:space-between;align-items:center"><h3>Share / Load votes</h3><button class="honB l" id="honX" style="width:auto;min-height:40px;margin:0;padding:0 14px">Close</button></div>
+<div class="how">${HOW}</div>
+<button class="honB" id="honShare">📤 Share votes</button>
+<button class="honB l" id="honCopy">📋 Copy votes code</button>
+<button class="honB l" id="honDl">💾 Download votes file (.json)</button>
+<div class="s2" id="honInfo"></div>
+<hr style="margin:14px 0">
+<b>Load votes</b><div class="s2">Paste a code you were sent, or pick a votes file. Votes are merged; for the same person and photo the newer vote wins.</div>
+<textarea id="honIn" placeholder="Paste code here (starts with ${H.prefix}:)"></textarea>
+<button class="honB g" id="honLoad">📥 Load votes</button>
+<label class="honB l" style="text-align:center;line-height:52px">📁 Pick a votes file<input type="file" id="honFile" accept=".json,.txt,application/json,text/plain" style="display:none"></label>
+</div>`;
+document.body.appendChild(ov);
+function open(){const c=makeCode();document.getElementById('honInfo').textContent=H.summary()+' · code is '+c.length+' characters.';ov.style.display='flex';document.getElementById('honIn').value=''}
+function close(){ov.style.display='none'}
+window.HONopen=open;
+ov.addEventListener('click',e=>{if(e.target===ov)close()});
+document.getElementById('honX').onclick=close;
+function copy(t){const fb=()=>{const a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.cssText='position:fixed;top:0;left:0;opacity:0';document.body.appendChild(a);a.select();a.setSelectionRange(0,t.length);let ok=false;try{ok=document.execCommand('copy')}catch(e){}a.remove();ok?toast('Code copied. Paste it into a text message.'):prompt('Copy this code:',t)};
+ if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(t).then(()=>toast('Code copied. Paste it into a text message.'),fb)}else fb()}
+function msgText(c){let t=H.title+' votes ('+H.summary()+'). Open the slideshow, tap Share / Load votes, then Load votes, and paste this:\n\n'+c;
+ if(/^https?:$/.test(location.protocol))t+='\n\nOr tap: '+location.href.split('#')[0]+'#v='+c;return t}
+document.getElementById('honShare').onclick=()=>{const c=makeCode(),t=msgText(c);
+ if(navigator.share){navigator.share({title:H.title+' votes',text:t}).catch(e=>{if(e&&e.name!=='AbortError')copy(c)})}else copy(c)};
+document.getElementById('honCopy').onclick=()=>copy(makeCode());
+document.getElementById('honDl').onclick=()=>{const j=JSON.stringify(H.exp());const bl=new Blob([j],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download=H.fname();document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},1500)};
+document.getElementById('honLoad').onclick=()=>load(document.getElementById('honIn').value);
+document.getElementById('honFile').onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>load(r.result);r.readAsText(f);e.target.value=''};
+window.HONbox=()=>`<div class="honBox"><div class="how">${HOW}</div><div class="r"><button onclick="HONopen();document.getElementById('honShare').scrollIntoView()">📤 Share votes</button><button onclick="HONopen();setTimeout(()=>document.getElementById('honIn').focus(),50)">📥 Load votes</button></div></div>`;
+H.after();
+// shared link: #v=CODE
+const h=location.hash;if(/^#v=/.test(h)){const code=decodeURIComponent(h.slice(3));history.replaceState(null,'',location.pathname+location.search);
+ setTimeout(()=>{if(confirm('Someone shared votes with you. Load them into this slideshow?'))load(code)},300)}
+})();
+</script></body></html>
